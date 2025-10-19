@@ -65,4 +65,6 @@
 
 ## TEAM
 
-- barisyenigun07
+- Baris Yenigun - [@barisyenigun07](https://github.com/barisyenigun07)
+- Mustafacan Koc - [@cankoc35](https://github.com/cankoc35)
+- Umut Akin - [@umutakin-dev](https://github.com/umutakin-dev)
