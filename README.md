@@ -4,16 +4,32 @@
 
 26.10.2025, 23:55
 
+## PROGRESS SUMMARY
+
+**Completed:**
+- ✅ Maven project setup with JUnit 4 and JaCoCo
+- ✅ NextDate program implementation (year: 1812-2100)
+- ✅ Boundary value testing (18 tests, all passing)
+
+**In Progress:**
+- 🔄 Equivalence class testing
+- 🔄 Decision table testing
+
+**Pending:**
+- ⏳ Coverage report generation
+- ⏳ Test report documentation
+- ⏳ Eclipse migration
+
 ## REQUIREMENTS
 
-- [ ] Develop using VSCode (will be converted to Eclipse before submission)
+- [x] Develop using VSCode (will be converted to Eclipse before submission)
 - [ ] Export your Java Project as the given format with your student ID: SEDS514_Project1_StdID1_StdID2.zip
-- [ ] Write object-oriented version of NextDate program in Java
+- [x] Write object-oriented version of NextDate program in Java
 - [ ] Develop and code unit tests using:
-  - [ ] Boundary value testing
+  - [x] Boundary value testing (18 tests - all passing)
   - [ ] Equivalence class testing
   - [ ] Decision table techniques
-- [ ] Run tests using JUnit 4
+- [x] Run tests using JUnit 4
 - [ ] Document results as a test report comparing test design techniques
 - [ ] Achieve 100% statement coverage and 85% branch coverage
 
@@ -27,22 +43,27 @@
 ### 2. VSCode Setup & Extensions
 - [x] Install VSCode Java Extension Pack
   - Includes Java language support, debugging, and JUnit runner
-- [X] Install Coverage Gutters extension
+- [x] Install Coverage Gutters extension
   - Visualizes code coverage in the editor
-- [ ] Configure Java project structure
+- [x] Configure Java project structure
   - Ensure compatibility with both VSCode and Eclipse
 
 ### 3. Build & Test Configuration
-- [ ] Set up Maven or Gradle build system
+- [x] Set up Maven build system
   - Ensures Eclipse compatibility for later migration
-- [ ] Configure JUnit 4 dependencies
-- [ ] Set up JaCoCo for code coverage
+- [x] Configure JUnit 4 dependencies
+- [x] Set up JaCoCo for code coverage
   - Industry standard, works with both VSCode and Eclipse
   - EclEmma uses JaCoCo underneath
 
 ### 4. Development Workflow
-- [ ] Create NextDate program with proper package structure
-- [ ] Develop test suite for boundary value testing
+- [x] Create NextDate program with proper package structure
+  - Implemented with year range 1812-2100
+  - Leap year detection
+  - Month-specific day validation
+- [x] Develop test suite for boundary value testing
+  - 18 tests covering year, month, and day boundaries
+  - All tests passing
 - [ ] Develop test suite for equivalence class testing
 - [ ] Develop test suite for decision table testing
 - [ ] Run tests and verify coverage using JaCoCo
