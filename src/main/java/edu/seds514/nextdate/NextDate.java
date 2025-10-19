@@ -63,7 +63,13 @@ public class NextDate {
             throw new IllegalArgumentException("Day must be between 1 and 31");
         }
 
-        // TODO: Add more detailed validation (days per month, leap years, etc.)
+        // Validate day is appropriate for the specific month
+        int maxDaysInMonth = getDaysInMonth(month, year);
+        if (day > maxDaysInMonth) {
+            throw new IllegalArgumentException(
+                "Day " + day + " is invalid for month " + month + " in year " + year +
+                " (max " + maxDaysInMonth + " days)");
+        }
     }
 
     /**

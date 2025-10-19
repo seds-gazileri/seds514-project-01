@@ -7,15 +7,18 @@
 ## PROGRESS SUMMARY
 
 **Completed:**
+
 - ✅ Maven project setup with JUnit 4 and JaCoCo
 - ✅ NextDate program implementation (year: 1812-2100)
 - ✅ Boundary value testing (18 tests, all passing)
 
 **In Progress:**
+
 - 🔄 Equivalence class testing
 - 🔄 Decision table testing
 
 **Pending:**
+
 - ⏳ Coverage report generation
 - ⏳ Test report documentation
 - ⏳ Eclipse migration
@@ -36,11 +39,13 @@
 ## PROJECT PLAN
 
 ### 1. Update Project Documentation
+
 - [x] Modify README to reflect VSCode usage
 - [ ] Document VSCode setup instructions
 - [ ] Create Eclipse migration guide
 
 ### 2. VSCode Setup & Extensions
+
 - [x] Install VSCode Java Extension Pack
   - Includes Java language support, debugging, and JUnit runner
 - [x] Install Coverage Gutters extension
@@ -49,6 +54,7 @@
   - Ensure compatibility with both VSCode and Eclipse
 
 ### 3. Build & Test Configuration
+
 - [x] Set up Maven build system
   - Ensures Eclipse compatibility for later migration
 - [x] Configure JUnit 4 dependencies
@@ -57,6 +63,7 @@
   - EclEmma uses JaCoCo underneath
 
 ### 4. Development Workflow
+
 - [x] Create NextDate program with proper package structure
   - Implemented with year range 1812-2100
   - Leap year detection
@@ -71,12 +78,14 @@
 - [ ] Verify 100% statement and 85% branch coverage
 
 ### 5. Test Report
+
 - [ ] Document test cases for each technique
 - [ ] Compare effectiveness of test design techniques
 - [ ] Include coverage analysis
 - [ ] Document findings and observations
 
 ### 6. Eclipse Migration Path
+
 - [ ] Use standard Java project structure throughout
 - [ ] Keep all dependencies in Maven/Gradle
 - [ ] Import project into Eclipse (Maven/Gradle import)
