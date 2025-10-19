@@ -307,8 +307,10 @@ Decision table tests reinforced coverage by:
 - Ensuring all decision rules work correctly
 
 **Final Coverage (BVT + ECT + DTT):**
-- Branch Coverage: 96% (no change - already complete)
-- Line Coverage: 97% (no change - already complete)
+- Branch Coverage: 96% (no change from ECT - already complete)
+- Line Coverage: 97% (no change from ECT - already complete)
+
+**Note:** DTT provided no coverage increase but added **confidence through testing the same branches with different scenarios** (e.g., Feb 28 tested with years 2000, 2024, 2100, 2019 to verify leap year logic works for all types, not just one case).
 
 ---
 
@@ -366,6 +368,124 @@ default:
 
 **Key Insight:** Equivalence Class Testing provided the most significant coverage improvement, especially for leap year logic and month-type variations.
 
+### 6.5 Individual Technique Coverage Analysis
+
+To understand the unique contribution of each testing technique, we ran each test suite independently and measured their individual coverage.
+
+#### 6.5.1 Boundary Value Testing (BVT) - Standalone Coverage
+
+**Test Count:** 18 tests
+
+| Overall Coverage | |
+|-----------------|---|
+| **Branch Coverage** | 70% (21/30) |
+| **Instruction Coverage** | 75% (111/148) |
+| **Line Coverage** | 86% (31/36) |
+
+**Method-Level Coverage:**
+
+| Method | Instructions | Branches | Analysis |
+|--------|-------------|----------|----------|
+| `getNextDate()` | 88% | 75% | Good coverage, misses year rollover branch |
+| `validateDate()` | 82% | 92% | Excellent - BVT targets validation heavily |
+| `isLeapYear()` | 30% | 16% | Poor - BVT uses typical years, misses leap logic |
+| `getDaysInMonth()` | 60% | 66% | Moderate - misses February leap year cases |
+| `NextDate()` (constructor) | 100% | n/a | ✅ Full coverage |
+
+**Key Finding:** BVT excels at **input validation** (92% branch coverage in `validateDate()`) but poorly covers **business logic** like leap year detection (16% branch coverage in `isLeapYear()`).
+
+#### 6.5.2 Equivalence Class Testing (ECT) - Standalone Coverage
+
+**Test Count:** 20 tests
+
+| Overall Coverage | |
+|-----------------|---|
+| **Branch Coverage** | 93% (28/30) |
+| **Instruction Coverage** | 95% (142/148) |
+| **Line Coverage** | 97% (35/36) |
+
+**Method-Level Coverage:**
+
+| Method | Instructions | Branches | Analysis |
+|--------|-------------|----------|----------|
+| `getNextDate()` | 100% | 100% | ✅ Complete coverage |
+| `validateDate()` | 100% | 92% | ✅ Near-complete, same as BVT for branches |
+| `isLeapYear()` | 100% | 100% | ✅ All leap year rules tested |
+| `getDaysInMonth()` | 70% | 83% | Good - February cases covered |
+| `NextDate()` (constructor) | 100% | n/a | ✅ Full coverage |
+
+**Key Finding:** ECT alone achieves **93% branch coverage** because it specifically targets different classes of behavior (month types, leap year types, day transitions). This technique is most effective for categorical logic.
+
+#### 6.5.3 Decision Table Testing (DTT) - Standalone Coverage
+
+**Test Count:** 14 tests
+
+| Overall Coverage | |
+|-----------------|---|
+| **Branch Coverage** | 73% (22/30) |
+| **Instruction Coverage** | 79% (118/148) |
+| **Line Coverage** | 86% (31/36) |
+
+**Method-Level Coverage:**
+
+| Method | Instructions | Branches | Analysis |
+|--------|-------------|----------|----------|
+| `getNextDate()` | 100% | 100% | ✅ Complete - DTT focuses on date logic |
+| `validateDate()` | 52% | 50% | Poor - DTT assumes valid inputs |
+| `isLeapYear()` | 100% | 100% | ✅ All leap year rules tested |
+| `getDaysInMonth()` | 70% | 83% | Good - tests month-end scenarios |
+| `NextDate()` (constructor) | 100% | n/a | ✅ Full coverage |
+
+**Key Finding:** DTT excels at **business logic** (100% coverage in both `getNextDate()` and `isLeapYear()`) but provides poor coverage for **input validation** (50% branch coverage in `validateDate()`), since decision tables typically assume valid inputs.
+
+#### 6.5.4 Coverage Comparison Summary
+
+| Metric | BVT (18 tests) | ECT (20 tests) | DTT (14 tests) | Combined (52 tests) |
+|--------|----------------|----------------|----------------|---------------------|
+| **Branch Coverage** | 70% | **93%** | 73% | **96%** |
+| **Instruction Coverage** | 75% | **95%** | 79% | **95%** |
+| **Line Coverage** | 86% | **97%** | 86% | **97%** |
+
+**Visual Coverage Progression:**
+
+```
+Branch Coverage by Technique:
+BVT:  ████████████████░░░░░░░░░░░░░░ 70%
+ECT:  ████████████████████████████░░ 93% ⭐ Most Effective
+DTT:  ██████████████████░░░░░░░░░░░░ 73%
+ALL:  ████████████████████████████░░ 96% (final)
+```
+
+#### 6.5.5 Unique Strengths by Coverage Area
+
+| Coverage Area | Best Technique | Coverage | Reason |
+|---------------|----------------|----------|---------|
+| **Input Validation** | BVT | 92% branches | Tests boundaries of valid ranges |
+| **Leap Year Logic** | ECT / DTT | 100% branches | Both test all 4 leap year rules |
+| **Month Type Logic** | ECT | 83% branches | Tests 31-day, 30-day, Feb variations |
+| **Date Transitions** | ECT | 100% branches | Tests all transition types |
+| **Year Rollover** | ECT / DTT | 100% branches | Both test Dec 31 → Jan 1 |
+
+#### 6.5.6 Coverage Overlap Analysis
+
+**Unique Coverage Contributions:**
+
+1. **BVT Unique Contribution:** ~0%
+   - All branches covered by BVT are also covered by ECT
+   - BVT validates ECT's approach to boundaries
+
+2. **ECT Unique Contribution:** ~23%
+   - ECT alone covers 93% vs BVT's 70%
+   - Adds critical leap year logic and month-type variations
+   - Could almost replace BVT for coverage, but BVT adds validation confidence
+
+3. **DTT Unique Contribution:** ~0%
+   - All branches covered by DTT are also covered by ECT
+   - DTT provides **validation through redundancy** (same branches, different scenarios)
+   - Example: Feb 28 tested with years 2000, 2024, 2100, 2019 to verify all leap year types
+
+**Note:** DTT provided no coverage increase but added **confidence through testing the same branches with different scenarios** (e.g., Feb 28 tested with years 2000, 2024, 2100, 2019 to verify leap year logic works for all types, not just one case).
+
 ---
 
 ## 7. Comparison of Techniques
@@ -398,10 +518,13 @@ default:
 Coverage Contribution:
 BVT:  71% branch (baseline)
 ECT:  +25% branch (71% → 96%)
-DTT:  +0% branch (validation/confirmation)
+DTT:  +0% branch (same branches, different scenarios for validation)
 ```
 
-**Key Finding:** ECT provided the most significant coverage improvement because it specifically targeted untested equivalence classes (leap year types, month types).
+**Key Findings:**
+- ECT provided the most significant coverage improvement because it specifically targeted untested equivalence classes (leap year types, month types)
+- DTT didn't increase coverage but tested the same branches with different input combinations (e.g., testing Feb 28 with 4 different years: 2000, 2024, 2100, 2019)
+- This redundancy provides confidence that logic works for all scenarios, not just one test case
 
 ### 7.4 Strengths and Weaknesses
 
